@@ -4,7 +4,7 @@
 
 install: extract
 	sudo install -m 0644 _libnss/libnss_rotd.so.2 /lib
-	sudo /sbin/ldconfig -n /lib /usr/lib
+	sudo /sbin/ldconfig /lib
 
 extract:
 	sudo mkdir /opt/rotor && sudo tar --no-same-owner -xvf _rotor/rotor-0.1.0.tar.gz -C /opt/rotor
