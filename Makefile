@@ -16,7 +16,7 @@ _build/rotd/_rotor/rotor-0.1.0.tar.gz:
 	cp ../rotor/_build/default/rel/rotor/rotor-0.1.0.tar.gz _build/rotd/_rotor/
 
 _build/rotd/_libnss/libnss_rotd_so.2:
-	cd ../libnss_rotd && make
+	cd ../libnss_rotd && make clean && make
 	cp ../libnss_rotd/libnss_rotd.so.2 _build/rotd/_libnss
 
 buildroot:

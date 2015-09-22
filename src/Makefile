@@ -12,4 +12,4 @@ extract:
 uninstall:
 	sudo rm -rf /opt/rotor
 	sudo rm /lib/libnss_rotd.so.2
-	sudo /sbin/ldconfig -n /lib /usr/lib
+	sudo /sbin/ldconfig /lib
