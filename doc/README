@@ -73,7 +73,10 @@ The ROTOR Internal Server Load Balancer
       The classic method of running ps and grepping for the process (here called
       rotor) also works.
 
-   d. Some application specific settings.
+   d. Log files.
+      Rotor logs to /var/log/rotor/
+
+   e. Some application specific settings.
       If you use a JVM language like Java, Clojure or Scala, be aware that the
       JVM will cache the results of hostname lookups indefinitely - this is the
       default setting. You will need to disable this for your JVM application to
