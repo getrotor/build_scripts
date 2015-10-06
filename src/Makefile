@@ -2,9 +2,12 @@
 .PHONY: extract install uninstall
 
 
-install: extract
+install: /var/log/rotor extract
 	sudo install -m 0644 _libnss/libnss_rotor.so.2 /lib
 	sudo /sbin/ldconfig /lib
+
+/var/log/rotor:
+	sudo mkdir /var/log/rotor
 
 extract:
 	sudo mkdir /opt/rotor && sudo tar --no-same-owner -xvf _rotor/rotor-0.2.0.tar.gz -C /opt/rotor
