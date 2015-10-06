@@ -21,8 +21,8 @@ The ROTOR Internal Server Load Balancer
 2. Installation.
 
    a. Prerequisites:
-      Rotor comes with a makefile that automates the installation. To use this
-      falility GNU Make is needed.
+      Rotor comes with a makefile that automates the installation process. To
+      use this facility GNU Make is needed.
 
    Installation is a two step process.
 
@@ -60,7 +60,7 @@ The ROTOR Internal Server Load Balancer
       The preferred way to start the rotor daemon is to do the following:
       "sudo /opt/rotor/bin/rotor start"
 
-      The prefered way to stop the rotor daemon is to do the following:
+      The preferred way to stop the rotor daemon is to do the following:
       "sudo /opt/rotor/bin/rotor stop"
 
    c. Checking if rotor is running.
