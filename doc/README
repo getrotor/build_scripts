@@ -1,53 +1,53 @@
-The ROTD Internal Server Load Balancer
+The ROTOR Internal Server Load Balancer
 --------------------------------------------------------------------------------
 
 1. Introduction.
 
-   Rotd is a server load balancer that is designed for "internal" use. The word
+   Rotor is a server load balancer that is designed for "internal" use. The word
    "internal" has a very specific meaning here - it refers to an setup where
    both the "clients" and "servers" reside within your colo/datacenter. As an
    example, consider a set of servers (Set A) that host a ReSTful API which is
    consumed by another set of servers (Set B), where both sets reside inside of
-   your colo/datacenter. Rotd can be used to load balance the requests that the
+   your colo/datacenter. Rotor can be used to load balance the requests that the
    API servers (Set A) receive from the consumers of the API (Set B).
-   For an example of a situation where Rotd CANNOT be used, consider a setup
+   For an example of a situation where Rotor CANNOT be used, consider a setup
    where a set of servers (Set A) provide a service thats accessed by end
    users from around the world using their web browsers - we need an "external"
-   facing server load balancer here, and Rotd is not one.
+   facing server load balancer here, and Rotor is not one.
 
-   Rotd consists of two components, a daemon called "rotor" and a libnss module
-   called "libnss_rotd" that forwards hostname lookups rotor.
+   Rotor consists of two components, a daemon called "rotor" and a libnss module
+   called "libnss_rotor" that forwards hostname lookups rotor.
 
 2. Installation.
 
    a. Prerequisites:
-      Rotd comes with a makefile that automates the installation. To use this
+      Rotor comes with a makefile that automates the installation. To use this
       falility GNU Make is needed.
 
    Installation is a two step process.
 
    b. Step #1: Install the daemon and the libnss module.
-      The rotd package tarball has a makefile that automates this.
+      The rotor package tarball has a makefile that automates this.
       Running "sudo make install" from the directory that has the Makefile
       (Note: Both the Makefile and this README are located in the same
-      directory) will install rotor under /opt, and the libnss_rotd module under
+      directory) will install rotor under /opt, and the libnss_rotor module under
       /lib.
 
    c. Step #2: Setup /etc/nsswitch.conf.
       The hosts entry in /etc/nsswitch.conf looks like the following by default.
 
-      hosts:      files dns myhostname
+      hosts:      files dns
 
-      Edit this file and add "rotd" as a source. The best location for this
+      Edit this file and add "rotor" as a source. The best location for this
       would be between "files" and "dns". The edited file should have this for
       the hosts entry:
 
-      hosts:      files rotd dns myhostname
+      hosts:      files rotor dns
 
    Once this is done, all hostname lookups will query the rotor daemon before
    querying DNS.
 
-3. Running Rotd.
+3. Running Rotor.
 
    a. Config File.
       Rotor uses /opt/rotor/etc/rotor.conf for its configuration data, this
@@ -77,7 +77,7 @@ The ROTD Internal Server Load Balancer
       If you use a JVM language like Java, Clojure or Scala, be aware that the
       JVM will cache the results of hostname lookups indefinitely - this is the
       default setting. You will need to disable this for your JVM application to
-      work with rotd - set "networkaddress.cache.ttl=0" in the file
+      work with rotor - set "networkaddress.cache.ttl=0" in the file
       "java.security" located at "%JRE%/lib/security"
       Refer to this doc for more info.
       http://docs.aws.amazon.com/AWSSdkDocsJava/latest/DeveloperGuide/java-dg-jvm-ttl.html
@@ -85,7 +85,7 @@ The ROTD Internal Server Load Balancer
 
 4. Basic Tests.
 
-   Once Rotd is setup and the rotor daemon is running, you can test your
+   Once Rotor is setup and the rotor daemon is running, you can test your
    rotations by using getent. For example, if you have setup a rotation called
    "test1.example.com" with reals "10.0.2.127", "10.0.2.126", and "10.0.2.125",
    running "getent hosts test1.example.com" multiple times will return the IPs
@@ -95,7 +95,7 @@ The ROTD Internal Server Load Balancer
    each response will be from a healthy real picked using the round robin
    algorithm.
 
-5. Uninstalling Rotd.
+5. Uninstalling Rotor.
    Run "make uninstall" from the top level directory in the package tarball, and
    revert your changes to /etc/nsswitch.conf
 
@@ -103,7 +103,8 @@ The ROTD Internal Server Load Balancer
 6. Limitations and Bugs.
    a. Only http is currently supported.
    b. Round Robin is the only algorithm thats currently implemented.
-   c. If rotd is enabled in /etc/nsswitch.conf and the rotor daemon is NOT
+   c. If rotor is enabled in /etc/nsswitch.conf and the rotor daemon is NOT
    running, all hostname lookups will take one second more than the usual.
    d. No runtime metrics are generated by rotor.
    e. The rotor daemon runs with root privileges.
+   f. No IPv6 support.
