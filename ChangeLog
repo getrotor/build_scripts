@@ -1,3 +1,7 @@
+2015-11-02 Varoun. P
+	* 0.3.0: Support all config options in rotor.conf, better logging,
+	refactored for cleaner code.
+
 2015-10-06 Varoun. P
 	* 0.2.0: New config file format, better logging, initial metrics work.
 
