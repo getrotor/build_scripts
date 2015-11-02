@@ -12,7 +12,7 @@ _build/rotor/README: doc/README
 	cp doc/README _build/rotor/
 
 _build/rotor/ChangeLog: ChangeLog
-	cp ChangeLog _build/Rotor/
+	cp ChangeLog _build/rotor/
 
 _build/rotor/_rotor/rotor-0.3.0.tar.gz:
 	cd ../rotor && rebar3 release tar
