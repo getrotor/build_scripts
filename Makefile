@@ -2,7 +2,7 @@
 
 .PHONY: package clean buildroot
 
-package: buildroot _build/rotor/_rotor/rotor-0.2.0.tar.gz _build/rotor/_libnss/libnss_rotor_so.2 _build/rotor/Makefile _build/rotor/README
+package: buildroot _build/rotor/_rotor/rotor-0.3.0.tar.gz _build/rotor/_libnss/libnss_rotor_so.2 _build/rotor/Makefile _build/rotor/README _build/rotor/ChangeLog
 	cd _build && tar -cvf rotor.tar rotor
 
 _build/rotor/Makefile: src/Makefile
@@ -11,9 +11,12 @@ _build/rotor/Makefile: src/Makefile
 _build/rotor/README: doc/README
 	cp doc/README _build/rotor/
 
-_build/rotor/_rotor/rotor-0.2.0.tar.gz:
+_build/rotor/ChangeLog: ChangeLog
+	cp ChangeLog _build/Rotor/
+
+_build/rotor/_rotor/rotor-0.3.0.tar.gz:
 	cd ../rotor && rebar3 release tar
-	cp ../rotor/_build/default/rel/rotor/rotor-0.2.0.tar.gz _build/rotor/_rotor/
+	cp ../rotor/_build/default/rel/rotor/rotor-0.3.0.tar.gz _build/rotor/_rotor/
 
 _build/rotor/_libnss/libnss_rotor_so.2:
 	cd ../libnss_rotor && make clean && make
