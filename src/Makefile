@@ -1,4 +1,4 @@
-# Install rotd/rotor
+# Install Rotor
 .PHONY: extract install uninstall
 
 
@@ -10,7 +10,7 @@ install: /var/log/rotor extract
 	sudo mkdir /var/log/rotor
 
 extract:
-	sudo mkdir /opt/rotor && sudo tar --no-same-owner -xvf _rotor/rotor-0.2.0.tar.gz -C /opt/rotor
+	sudo mkdir /opt/rotor && sudo tar --no-same-owner -xvf _rotor/rotor-0.3.0.tar.gz -C /opt/rotor
 
 uninstall:
 	sudo rm -rf /opt/rotor
